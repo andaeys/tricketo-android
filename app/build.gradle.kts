@@ -2,14 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "andaeys.io.momodulo.tricketo_android"
+    namespace = "andaeys.io.tricketo_android"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "andaeys.io.momodulo.tricketo_android"
+        applicationId = "andaeys.io.tricketo_android"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -65,6 +66,10 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    // Firebase dependencies
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database.ktx)
 
     // Testing dependencies
     testImplementation(libs.junit)

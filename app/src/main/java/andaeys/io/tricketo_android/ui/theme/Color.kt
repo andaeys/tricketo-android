@@ -1,4 +1,4 @@
-package andaeys.io.momodulo.tricketo_android.ui.theme
+package andaeys.io.tricketo_android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

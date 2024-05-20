@@ -1,6 +1,6 @@
-package andaeys.io.momodulo.tricketo_android
+package andaeys.io.tricketo_android
 
-import andaeys.io.momodulo.tricketo_android.ui.theme.TricketoandroidTheme
+import andaeys.io.tricketo_android.ui.theme.TricketoandroidTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
