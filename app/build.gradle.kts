@@ -71,6 +71,8 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.database.ktx)
 
+    implementation(libs.koin.android)
+
     // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

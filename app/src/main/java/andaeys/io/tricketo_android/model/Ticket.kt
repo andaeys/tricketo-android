@@ -6,6 +6,7 @@ import java.util.Date
 
 @IgnoreExtraProperties
 data class Ticket(
+    var ticketID: String = "",
     var enterTime: Long = Date().time,
     var licenseNumber: String = "",
     var driverName: String = "",

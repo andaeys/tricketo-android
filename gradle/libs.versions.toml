@@ -7,6 +7,7 @@ espressoCore = "3.5.1"
 firebaseBom = "32.1.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
+koinAndroid = "3.2.0"
 kotlin = "1.8.10"
 kotlinxCoroutinesAndroid = "1.6.4"
 lifecycleRuntimeKtx = "2.6.1"
@@ -36,6 +37,7 @@ androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx" }
 junit = { module = "junit:junit", version.ref = "junit" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 
 
