@@ -10,25 +10,26 @@ data class TicketItem(
     var inboundWeight: Int = 0,
     var outboundWeight: Int = 0
 ){
+    companion object {
+        fun fromTicketEntity(ticketKey: String?, ticket: Ticket?): TicketItem {
+            return TicketItem(
+                ticketKey = ticketKey?:"",
+                enterTime = ticket?.enterTime?: 0,
+                licenseNumber = ticket?.licenseNumber?:"",
+                driverName = ticket?.driverName?:"",
+                inboundWeight = ticket?.inboundWeight?:0,
+                outboundWeight = ticket?.outboundWeight?:0
+            )
+        }
 
-    fun fromTicketEntity(ticketKey: String, ticket: Ticket): TicketItem {
-        return TicketItem(
-            ticketKey = ticketKey,
-            enterTime = ticket.enterTime,
-            licenseNumber = ticket.licenseNumber,
-            driverName = ticket.driverName,
-            inboundWeight = ticket.inboundWeight,
-            outboundWeight = ticket.outboundWeight
-        )
-    }
-
-    fun toTicketEntity(ticket: TicketItem): Ticket {
-        return Ticket(
-            enterTime = ticket.enterTime,
-            licenseNumber = ticket.licenseNumber,
-            driverName = ticket.driverName,
-            inboundWeight = ticket.inboundWeight,
-            outboundWeight = ticket.outboundWeight
-        )
+        fun toTicketEntity(ticket: TicketItem): Ticket {
+            return Ticket(
+                enterTime = ticket.enterTime,
+                licenseNumber = ticket.licenseNumber,
+                driverName = ticket.driverName,
+                inboundWeight = ticket.inboundWeight,
+                outboundWeight = ticket.outboundWeight
+            )
+        }
     }
 }

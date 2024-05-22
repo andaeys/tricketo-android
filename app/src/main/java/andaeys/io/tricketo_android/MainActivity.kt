@@ -1,5 +1,6 @@
 package andaeys.io.tricketo_android
 
+import andaeys.io.tricketo_android.model.TicketItem
 import andaeys.io.tricketo_android.model.entity.Ticket
 import andaeys.io.tricketo_android.repository.TicketRepository
 import andaeys.io.tricketo_android.ui.theme.TricketoandroidTheme
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TricketoandroidTheme {
-                var tickets by remember { mutableStateOf(emptyList<Ticket>()) }
+                var tickets by remember { mutableStateOf(emptyList<TicketItem>()) }
                 var errorMessage by remember { mutableStateOf<String?>(null) }
 
                 val coroutineScope = rememberCoroutineScope()
