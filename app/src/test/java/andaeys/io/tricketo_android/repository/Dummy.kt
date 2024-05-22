@@ -1,6 +1,6 @@
 package andaeys.io.tricketo_android.repository
 
-import andaeys.io.tricketo_android.model.Ticket
+import andaeys.io.tricketo_android.model.entity.Ticket
 import java.util.Date
 
 fun dummyTicketList(size: Int = 1): List<Ticket> {

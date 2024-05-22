@@ -1,4 +1,4 @@
-package andaeys.io.tricketo_android.model
+package andaeys.io.tricketo_android.model.entity
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
@@ -6,7 +6,6 @@ import java.util.Date
 
 @IgnoreExtraProperties
 data class Ticket(
-    var ticketID: String = "",
     var enterTime: Long = Date().time,
     var licenseNumber: String = "",
     var driverName: String = "",

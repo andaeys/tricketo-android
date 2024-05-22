@@ -1,6 +1,6 @@
 package andaeys.io.tricketo_android.repository
 
-import andaeys.io.tricketo_android.model.Ticket
+import andaeys.io.tricketo_android.model.entity.Ticket
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.database.DataSnapshot

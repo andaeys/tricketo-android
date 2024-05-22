@@ -1,7 +1,7 @@
 package andaeys.io.tricketo_android.repository
 
-import andaeys.io.tricketo_android.model.Ticket
 import andaeys.io.tricketo_android.model.TicketConstants
+import andaeys.io.tricketo_android.model.entity.Ticket
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await

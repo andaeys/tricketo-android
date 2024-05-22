@@ -1,6 +1,6 @@
 package andaeys.io.tricketo_android
 
-import andaeys.io.tricketo_android.model.Ticket
+import andaeys.io.tricketo_android.model.entity.Ticket
 import andaeys.io.tricketo_android.repository.TicketRepository
 import andaeys.io.tricketo_android.ui.theme.TricketoandroidTheme
 import android.os.Bundle
@@ -22,7 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import java.util.Date
-import java.util.UUID
 
 class MainActivity : ComponentActivity() {
 
@@ -63,7 +62,6 @@ class MainActivity : ComponentActivity() {
                         coroutineScope.launch {
                             val timeEnter = Date().time
                             val newTicket = Ticket(
-                                ticketID = UUID.randomUUID().toString(),
                                 enterTime = timeEnter,
                                 licenseNumber = licenceNumber,
                                 driverName = driverName,
