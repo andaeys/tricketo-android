@@ -5,14 +5,15 @@ composeBom = "2022.12.00"
 coreKtx = "1.10.0"
 espressoCore = "3.5.1"
 firebaseBom = "32.1.0"
-junit = "4.12"
+junit = "4.13.2"
 junitVersion = "1.1.5"
 koinAndroid = "3.2.0"
 kotlin = "1.8.10"
 kotlinxCoroutinesAndroid = "1.6.4"
 lifecycleRuntimeKtx = "2.6.1"
 material3 = "1.1.0"
-mockitoCore = "3.12.4"
+mockitoCore = "4.6.1"
+mockitoInline = "4.6.1"
 roomRuntime = "2.5.0"
 ui = "1.3.3"
 uiGraphics = "1.3.3"
@@ -41,6 +42,7 @@ junit = { module = "junit:junit", version.ref = "junit" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 
 
 [plugins]

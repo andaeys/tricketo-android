@@ -11,6 +11,9 @@ class TicketRepositoryImpl(firebaseDatabase: FirebaseDatabase) : TicketRepositor
     private val ticketsRef: DatabaseReference = firebaseDatabase.getReference(TicketConstants.TICKET_REF)
     override suspend fun getTickets(): List<Ticket> {
         val dataSnapshot = ticketsRef.get().await()
+        if (dataSnapshot.childrenCount.toInt()==0){
+            return emptyList()
+        }
         return dataSnapshot.children.mapNotNull {
             it.getValue(Ticket::class.java)
         }
