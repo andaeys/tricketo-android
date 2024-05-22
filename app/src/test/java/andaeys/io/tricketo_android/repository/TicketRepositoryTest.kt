@@ -1,6 +1,6 @@
 package andaeys.io.tricketo_android.repository
 
-import andaeys.io.tricketo_android.model.Ticket
+import andaeys.io.tricketo_android.model.entity.Ticket
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.database.DataSnapshot
@@ -40,9 +40,10 @@ class TicketRepositoryTest {
         val expectedTicketList = dummyTicketList(expectedTicketListSize)
 
         val dataSnapshot = mock(DataSnapshot::class.java)
-        val childDataSnapshot =  expectedTicketList.map { ticket ->
+        val childDataSnapshot =  expectedTicketList.mapIndexed {i, ticket ->
             mock(DataSnapshot::class.java).apply {
                 `when`(getValue(Ticket::class.java)).thenReturn(ticket)
+                `when`(key).thenReturn("$i")
             }
         }
         `when`(dataSnapshot.children).thenReturn(childDataSnapshot.asIterable())
@@ -54,7 +55,7 @@ class TicketRepositoryTest {
 
         val result = repository.getTickets()
 
-        assertEquals(expectedTicketListSize,result.size)
+        assertEquals(expectedTicketListSize, result.size)
     }
 
     @Test

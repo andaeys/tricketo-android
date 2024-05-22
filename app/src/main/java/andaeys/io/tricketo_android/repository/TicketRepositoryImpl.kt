@@ -1,7 +1,8 @@
 package andaeys.io.tricketo_android.repository
 
-import andaeys.io.tricketo_android.model.Ticket
 import andaeys.io.tricketo_android.model.TicketConstants
+import andaeys.io.tricketo_android.model.TicketItem
+import andaeys.io.tricketo_android.model.entity.Ticket
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await
@@ -9,13 +10,14 @@ import kotlinx.coroutines.tasks.await
 class TicketRepositoryImpl(firebaseDatabase: FirebaseDatabase) : TicketRepository {
 
     private val ticketsRef: DatabaseReference = firebaseDatabase.getReference(TicketConstants.TICKET_REF)
-    override suspend fun getTickets(): List<Ticket> {
+    override suspend fun getTickets(): List<TicketItem> {
         val dataSnapshot = ticketsRef.get().await()
         if (dataSnapshot.childrenCount.toInt()==0){
             return emptyList()
         }
         return dataSnapshot.children.mapNotNull {
-            it.getValue(Ticket::class.java)
+            val ticketEntity = it.getValue(Ticket::class.java)
+            TicketItem.fromTicketEntity(it.key, ticketEntity)
         }
     }
 
