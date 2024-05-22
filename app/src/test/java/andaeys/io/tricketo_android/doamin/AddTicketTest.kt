@@ -14,7 +14,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.argumentCaptor
 
-class AddTicketImplTest {
+class AddTicketTest {
 
     @Mock
     private lateinit var ticketRepository: TicketRepository
