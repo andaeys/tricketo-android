@@ -1,5 +1,7 @@
 package andaeys.io.tricketo_android.di
 
+import andaeys.io.tricketo_android.doamin.AddTicket
+import andaeys.io.tricketo_android.doamin.AddTicketImpl
 import andaeys.io.tricketo_android.doamin.GetTicketList
 import andaeys.io.tricketo_android.doamin.GetTicketListImpl
 import andaeys.io.tricketo_android.repository.TicketRepository
@@ -17,6 +19,7 @@ val repositoryModule = module {
 
 val domainModule = module {
     single<GetTicketList>{GetTicketListImpl(get())}
+    single<AddTicket>{AddTicketImpl(get())}
 }
 
 val viewModelModule = module {
