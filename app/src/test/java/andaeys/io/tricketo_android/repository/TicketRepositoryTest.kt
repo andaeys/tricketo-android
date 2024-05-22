@@ -46,6 +46,7 @@ class TicketRepositoryTest {
             }
         }
         `when`(dataSnapshot.children).thenReturn(childDataSnapshot.asIterable())
+        `when`(dataSnapshot.childrenCount).thenReturn(expectedTicketListSize.toLong())
         val taskCompletionSource = TaskCompletionSource<DataSnapshot>()
         taskCompletionSource.setResult(dataSnapshot)
         val mockTask: Task<DataSnapshot> = taskCompletionSource.task
@@ -94,7 +95,6 @@ class TicketRepositoryTest {
         taskCompletionSource.setResult(null)
         val mockTask: Task<Void> = taskCompletionSource.task
 
-
         val dummyTicketKey = "unique_ticket"
         `when`(ticketsRef.push()).thenReturn(mockNewTicketRef)
         `when`(mockNewTicketRef.key).thenReturn(dummyTicketKey)
@@ -117,6 +117,41 @@ class TicketRepositoryTest {
 
         val exception = assertThrows(Exception::class.java){
             runBlocking { repository.addTicket(ticket) }
+        }
+
+        assertEquals(expectedError.message, exception.message)
+    }
+
+    @Test
+    fun `updateTicket should complete when success`() = runBlocking {
+        val ticket = dummyTicketList(1).first()
+        val ticketKey = "ticket_key"
+        val mockNewTicketRef = mock(DatabaseReference::class.java)
+        val taskCompletionSource = TaskCompletionSource<Void>()
+        taskCompletionSource.setResult(null)
+        val mockTask: Task<Void> = taskCompletionSource.task
+
+        `when`(mockNewTicketRef.key).thenReturn(ticketKey)
+        `when`(ticketsRef.child(ticketKey)).thenReturn(mockNewTicketRef)
+        `when`(mockNewTicketRef.setValue(ticket)).thenReturn(mockTask)
+
+        repository.updateTicket(ticketKey, ticket)
+
+        verify(mockNewTicketRef).setValue(ticket)
+        assertNotNull(ticket)
+    }
+
+    @Test
+    fun `updateTicket should throw error when error occurred`() = runBlocking {
+        val ticket = dummyTicketList(1).first()
+        val ticketKey = "ticket_key"
+        val expectedError = Exception("Something when wrong")
+
+        `when`(ticketsRef.child(ticketKey))
+            .thenAnswer { throw expectedError }
+
+        val exception = assertThrows(Exception::class.java){
+            runBlocking { repository.updateTicket(ticketKey, ticket) }
         }
 
         assertEquals(expectedError.message, exception.message)
