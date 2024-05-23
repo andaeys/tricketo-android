@@ -29,6 +29,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -52,9 +53,14 @@ class TicketListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val state by viewModel.ticketListState.collectAsState()
             TicketListScreen(
-                viewModel
-            ) { viewModel.fetchTicketList() }
+                state = state,
+                onRefresh = {viewModel.fetchTicketList()},
+                onSortBy = {attr -> viewModel.sortTicketBy(attr)},
+                onAddClick = {},
+                onItemClick = {ticeketItem ->}
+            )
         }
     }
 
@@ -66,12 +72,20 @@ class TicketListActivity : ComponentActivity() {
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun TicketListScreen(viewModel: TicketLIstViewModel,  onRefresh: () -> Unit = {}) {
-    val state by viewModel.ticketListState.collectAsState()
+fun TicketListScreen(
+    state: TicketListState,
+    onRefresh: () -> Unit = {},
+    onSortBy: (TicketAttr) -> Unit,
+    onAddClick: () -> Unit = {},
+    onItemClick: (TicketItem) -> Unit = {}
+) {
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { /* TODO: Add ticket action */ }) {
+            FloatingActionButton(
+                onClick = {onAddClick()},
+                containerColor = MaterialTheme.colorScheme.primary
+            ) {
                 Icon(Icons.Default.Add, contentDescription = "Add Ticket")
             }
         }
@@ -83,13 +97,13 @@ fun TicketListScreen(viewModel: TicketLIstViewModel,  onRefresh: () -> Unit = {}
             when (state) {
                 is TicketListState.Loading -> LoadingView()
                 is TicketListState.Error -> {
-                    ErrorView((state as TicketListState.Error).errorMessage) { onRefresh() }
+                    ErrorView(state.errorMessage) { onRefresh() }
                 }
                 is TicketListState.Empty -> EmptyView()
                 is TicketListState.Success -> TicketList(
-                    tickets = (state as TicketListState.Success).ticketItemList,
-                    onSort = { attr -> viewModel.sortTicketBy(attr) },
-                    onTicketClick = { ticket -> /* TODO: View/edit ticket */ }
+                    tickets = state.ticketItemList,
+                    onSort = { attr -> onSortBy(attr) },
+                    onTicketClick = { ticket -> onItemClick(ticket) }
                 )
             }
         }
@@ -138,12 +152,12 @@ fun TicketCard(ticket: TicketItem, onTicketClick: (TicketItem) -> Unit) {
             Text("Enter Time: ${ticket.enterTime}")
             Text("Inbound Weight: ${ticket.inboundWeight}")
             Text("Outbound Weight: ${ticket.outboundWeight}")
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Button(onClick = { /* TODO: View/edit ticket */ }) { Text("View/Edit") }
-            }
+//            Row(
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                modifier = Modifier.fillMaxWidth()
+//            ) {
+//                Button(onClick = { /* TODO: View/edit ticket */ }) { Text("View/Edit") }
+//            }
         }
     }
 }
