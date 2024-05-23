@@ -6,6 +6,7 @@ import andaeys.io.tricketo_android.doamin.GetTicketList
 import andaeys.io.tricketo_android.doamin.GetTicketListImpl
 import andaeys.io.tricketo_android.doamin.UpdateTicket
 import andaeys.io.tricketo_android.doamin.UpdateTicketImpl
+import andaeys.io.tricketo_android.model.viewmodels.TicketLIstViewModel
 import andaeys.io.tricketo_android.repository.TicketRepository
 import andaeys.io.tricketo_android.repository.TicketRepositoryImpl
 import com.google.firebase.database.FirebaseDatabase
@@ -26,5 +27,5 @@ val domainModule = module {
 }
 
 val viewModelModule = module {
-
+    factory { TicketLIstViewModel(get()) }
 }
