@@ -8,6 +8,7 @@ import andaeys.io.tricketo_android.doamin.UpdateTicket
 import andaeys.io.tricketo_android.doamin.UpdateTicketImpl
 import andaeys.io.tricketo_android.repository.TicketRepository
 import andaeys.io.tricketo_android.repository.TicketRepositoryImpl
+import andaeys.io.tricketo_android.viewmodels.TicketLIstViewModel
 import com.google.firebase.database.FirebaseDatabase
 import org.koin.dsl.module
 
@@ -26,5 +27,5 @@ val domainModule = module {
 }
 
 val viewModelModule = module {
-
+    factory { TicketLIstViewModel(get()) }
 }

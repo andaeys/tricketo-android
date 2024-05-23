@@ -10,6 +10,7 @@ junitVersion = "1.1.5"
 koinAndroid = "3.2.0"
 kotlin = "1.8.10"
 kotlinxCoroutinesAndroid = "1.6.4"
+kotlinxCoroutinesTest = "1.6.4"
 lifecycleRuntimeKtx = "2.6.1"
 material3 = "1.1.0"
 mockitoCore = "4.6.1"
@@ -42,6 +43,7 @@ firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx" }
 junit = { module = "junit:junit", version.ref = "junit" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
