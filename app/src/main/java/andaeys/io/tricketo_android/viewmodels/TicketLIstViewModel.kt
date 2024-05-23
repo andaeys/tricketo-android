@@ -1,16 +1,20 @@
 package andaeys.io.tricketo_android.viewmodels
 
 import andaeys.io.tricketo_android.doamin.GetTicketList
+import andaeys.io.tricketo_android.doamin.SortTicketByAttribute
+import andaeys.io.tricketo_android.model.TicketAttr
 import andaeys.io.tricketo_android.model.state.TicketListState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 
-class TicketLIstViewModel(private val getTicketList: GetTicketList): ViewModel() {
+class TicketLIstViewModel(
+    private val getTicketList: GetTicketList,
+    private val sortTicketByAttribute: SortTicketByAttribute
+): ViewModel() {
     private val _ticketListState = MutableStateFlow<TicketListState>(TicketListState.Loading)
     val ticketListState: StateFlow<TicketListState> = _ticketListState
 
@@ -31,9 +35,16 @@ class TicketLIstViewModel(private val getTicketList: GetTicketList): ViewModel()
         }
     }
 
-    fun sortBy(prop: Int) {
-        viewModelScope.launch(exceptionHandler){
-            val latestState: TicketListState =  _ticketListState.last()
+    fun sortTicketBy(ticketAttr: TicketAttr) {
+        viewModelScope.launch(exceptionHandler) {
+            val currentState = _ticketListState.value
+            if (currentState is TicketListState.Success) {
+//                val sortedList = withContext(Dispatchers.Default) {
+//                    sortTicketByAttribute.execute(currentState.ticketItemList, ticketAttr)
+//                }
+                val sortedList = sortTicketByAttribute.execute(currentState.ticketItemList, ticketAttr)
+                _ticketListState.value = TicketListState.Success(ticketItemList = sortedList)
+            }
         }
 
     }

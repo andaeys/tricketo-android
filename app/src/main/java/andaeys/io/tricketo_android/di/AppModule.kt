@@ -30,5 +30,5 @@ val domainModule = module {
 }
 
 val viewModelModule = module {
-    factory { TicketLIstViewModel(get()) }
+    factory { TicketLIstViewModel(get(), get()) }
 }
