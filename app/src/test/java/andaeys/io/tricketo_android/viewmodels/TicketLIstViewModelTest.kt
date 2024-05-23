@@ -1,6 +1,9 @@
 package andaeys.io.tricketo_android.viewmodels
 
 import andaeys.io.tricketo_android.doamin.GetTicketList
+import andaeys.io.tricketo_android.doamin.SortTicketByAttribute
+import andaeys.io.tricketo_android.doamin.SortTicketByAttributeImpl
+import andaeys.io.tricketo_android.model.TicketAttr
 import andaeys.io.tricketo_android.model.TicketItem
 import andaeys.io.tricketo_android.model.state.TicketListState
 import andaeys.io.tricketo_android.repository.dummyTicketList
@@ -22,9 +25,11 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TicketLIstViewModelTest {
     @Mock
     private lateinit var getTicketList: GetTicketList
+    private lateinit var sortTicketByAttribute: SortTicketByAttribute
     private lateinit var viewModel: TicketLIstViewModel
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -32,7 +37,8 @@ class TicketLIstViewModelTest {
     fun setUp() {
         Dispatchers.setMain(StandardTestDispatcher())
         MockitoAnnotations.openMocks(this)
-        viewModel = TicketLIstViewModel(getTicketList)
+        sortTicketByAttribute = SortTicketByAttributeImpl()
+        viewModel = TicketLIstViewModel(getTicketList, sortTicketByAttribute)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -115,4 +121,31 @@ class TicketLIstViewModelTest {
         }
     }
 
+    @Test
+    fun `sortTicketBy should sort the list by the given attribute`() = runTest {
+        val ticketList = listOf(
+            TicketItem("1", 1L, "123", "Zico", 2000, 3000),
+            TicketItem("2", 2L, "456", "Badrun", 1500, 2500),
+            TicketItem("3", 3L, "789", "Cuplis", 1800, 2800)
+        )
+
+        `when`(getTicketList.execute()).thenReturn(ticketList)
+
+        viewModel.fetchTicketList()
+        advanceUntilIdle()
+
+        // Sort by LICENSE_NUMBER
+        viewModel.sortTicketBy(TicketAttr.LICENSE_NUMBER)
+        val sortedStates = mutableListOf<TicketListState>()
+        val job = launch { viewModel.ticketListState.toList(sortedStates) }
+        advanceUntilIdle()
+
+        val sortedList = ticketList.sortedBy { it.licenseNumber }
+        assertTrue(sortedStates.last() is TicketListState.Success)
+        if (sortedStates.last() is TicketListState.Success) {
+            val successState = sortedStates.last() as TicketListState.Success
+            assertEquals(sortedList, successState.ticketItemList)
+        }
+        job.cancel()
+    }
 }
