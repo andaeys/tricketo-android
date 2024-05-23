@@ -1,4 +1,4 @@
-package andaeys.io.tricketo_android.model.viewmodels
+package andaeys.io.tricketo_android.viewmodels
 
 import andaeys.io.tricketo_android.doamin.GetTicketList
 import andaeys.io.tricketo_android.model.state.TicketListState

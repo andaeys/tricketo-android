@@ -4,6 +4,7 @@ import andaeys.io.tricketo_android.doamin.GetTicketList
 import andaeys.io.tricketo_android.model.TicketItem
 import andaeys.io.tricketo_android.model.state.TicketListState
 import andaeys.io.tricketo_android.repository.dummyTicketList
+import andaeys.io.tricketo_android.viewmodels.TicketLIstViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -45,7 +46,7 @@ class TicketLIstViewModelTest {
         val expectedTicketItemList = ticketEntityList.mapIndexed { index, ticket ->
             TicketItem.fromTicketEntity("$index", ticket)
         }
-        val expectedFlowCount = 2
+        val expectedFlowCount = 4
 
         `when`(getTicketList.execute()).thenReturn(expectedTicketItemList)
 
