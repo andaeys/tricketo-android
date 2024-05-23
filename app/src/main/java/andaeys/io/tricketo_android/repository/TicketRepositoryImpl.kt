@@ -20,7 +20,7 @@ class TicketRepositoryImpl(firebaseDatabase: FirebaseDatabase) : TicketRepositor
         dataSnapshot.children.mapNotNull {
             val ticketEntity = it.getValue(Ticket::class.java)
             TicketItem.fromTicketEntity(it.key, ticketEntity)
-        }
+        }.sortedByDescending { it.enterTime }
     }
 
     override suspend fun addTicket(ticket: Ticket)  {

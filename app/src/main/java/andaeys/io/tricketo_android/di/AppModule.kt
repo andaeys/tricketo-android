@@ -4,6 +4,8 @@ import andaeys.io.tricketo_android.doamin.AddTicket
 import andaeys.io.tricketo_android.doamin.AddTicketImpl
 import andaeys.io.tricketo_android.doamin.GetTicketList
 import andaeys.io.tricketo_android.doamin.GetTicketListImpl
+import andaeys.io.tricketo_android.doamin.SortTicketByAttribute
+import andaeys.io.tricketo_android.doamin.SortTicketByAttributeImpl
 import andaeys.io.tricketo_android.doamin.UpdateTicket
 import andaeys.io.tricketo_android.doamin.UpdateTicketImpl
 import andaeys.io.tricketo_android.repository.TicketRepository
@@ -24,6 +26,7 @@ val domainModule = module {
     single<GetTicketList>{GetTicketListImpl(get())}
     single<AddTicket>{AddTicketImpl(get())}
     single<UpdateTicket>{UpdateTicketImpl(get())}
+    single<SortTicketByAttribute>{SortTicketByAttributeImpl()}
 }
 
 val viewModelModule = module {

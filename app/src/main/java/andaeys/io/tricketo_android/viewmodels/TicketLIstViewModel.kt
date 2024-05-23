@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 
 class TicketLIstViewModel(private val getTicketList: GetTicketList): ViewModel() {
@@ -28,5 +29,12 @@ class TicketLIstViewModel(private val getTicketList: GetTicketList): ViewModel()
             }
             _ticketListState.value = state
         }
+    }
+
+    fun sortBy(prop: Int) {
+        viewModelScope.launch(exceptionHandler){
+            val latestState: TicketListState =  _ticketListState.last()
+        }
+
     }
 }
