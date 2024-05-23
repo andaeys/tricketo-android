@@ -39,13 +39,14 @@ class TicketLIstViewModel(
         viewModelScope.launch(exceptionHandler) {
             val currentState = _ticketListState.value
             if (currentState is TicketListState.Success) {
-//                val sortedList = withContext(Dispatchers.Default) {
-//                    sortTicketByAttribute.execute(currentState.ticketItemList, ticketAttr)
-//                }
                 val sortedList = sortTicketByAttribute.execute(currentState.ticketItemList, ticketAttr)
                 _ticketListState.value = TicketListState.Success(ticketItemList = sortedList)
             }
         }
 
+    }
+
+    init {
+        fetchTicketList()
     }
 }
