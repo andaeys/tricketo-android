@@ -45,8 +45,4 @@ class TicketLIstViewModel(
         }
 
     }
-
-    init {
-        fetchTicketList()
-    }
 }

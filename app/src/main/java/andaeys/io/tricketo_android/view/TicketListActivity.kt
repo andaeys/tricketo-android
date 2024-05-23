@@ -114,10 +114,13 @@ fun TicketList(
 
 @Composable
 fun SortOptions(onSort: (TicketAttr) -> Unit) {
-    Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Button(onClick = { onSort(TicketAttr.ENTER_TIME) }) { Text("Sort by Date") }
-        Button(onClick = { onSort(TicketAttr.DRIVER_NAME) }) { Text("Sort by Driver") }
-        Button(onClick = { onSort(TicketAttr.LICENSE_NUMBER) }) { Text("Sort by License") }
+    Column(modifier = Modifier.padding(8.dp)) {
+        Text("Sort by:")
+        Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = { onSort(TicketAttr.ENTER_TIME) }) { Text(TicketAttr.ENTER_TIME.description) }
+            Button(onClick = { onSort(TicketAttr.DRIVER_NAME) }) { Text(TicketAttr.DRIVER_NAME.description) }
+            Button(onClick = { onSort(TicketAttr.LICENSE_NUMBER) }) { Text(TicketAttr.LICENSE_NUMBER.description) }
+        }
     }
 }
 
