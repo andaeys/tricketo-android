@@ -90,7 +90,7 @@ fun TicketListScreen(
     onSortBy: (TicketAttr) -> Unit,
     onAddClick: () -> Unit = {},
     onItemClick: (TicketItem) -> Unit = {},
-    onEditClick: (TicketItem) -> Unit = {}
+    onEditClick: (TicketItem) -> Unit = {},
 ) {
 
     Scaffold(
@@ -260,12 +260,9 @@ fun EmptyView() {
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        val aComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.search_not_found))
-        LottieAnimation(
-            composition = aComposition ,
-            iterations = LottieConstants.IterateForever,
-            modifier = Modifier.size(480.dp)
-        )
+        Column {
+            Text(text = "Data is empty, please add")
+        }
     }
 }
 
