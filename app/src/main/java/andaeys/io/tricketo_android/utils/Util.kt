@@ -15,3 +15,20 @@ fun Long.toFormattedTimeString(): String {
     val format = SimpleDateFormat("HH:mm", Locale.getDefault())
     return format.format(date)
 }
+
+fun Long.toFormattedFullString(): String {
+    val date = Date(this)
+    val format = SimpleDateFormat("MMM dd, yyyy - HH:mm", Locale.getDefault())
+    return format.format(date)
+}
+
+fun dateStringToLong(dateString: String, format: String = "MMM dd, yyyy - HH:mm"): Long? {
+    return try {
+        val sdf = SimpleDateFormat(format, Locale.getDefault())
+        val date = sdf.parse(dateString)
+        date?.time
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
+}
