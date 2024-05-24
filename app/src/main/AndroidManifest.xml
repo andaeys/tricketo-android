@@ -16,6 +16,11 @@
         android:theme="@style/Theme.Tricketoandroid"
         tools:targetApi="31">
         <activity
+            android:name=".view.TicketDetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_ticket_detail"
+            android:theme="@style/Theme.Tricketoandroid" />
+        <activity
             android:name=".view.TicketEditActivity"
             android:exported="false"
             android:label="@string/title_activity_ticket_edi"
@@ -31,11 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Tricketoandroid"/>
+
     </application>
 
 </manifest>
