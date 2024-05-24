@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tricketo-android</string>
+    <string name="app_name">Tricketo</string>
     <string name="title_activity_ticket_list">TicketListActivity</string>
     <string name="title_activity_ticket_edi">TicketEdiActivity</string>
     <string name="title_activity_ticket_detail">TicketDetailActivity</string>
