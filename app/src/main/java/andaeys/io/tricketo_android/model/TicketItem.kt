@@ -1,7 +1,11 @@
 package andaeys.io.tricketo_android.model
 
 import andaeys.io.tricketo_android.model.entity.Ticket
+import android.os.Parcelable
+import com.google.gson.Gson
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class TicketItem(
     val ticketKey: String,
     var enterTime: Long = 0,
@@ -9,7 +13,7 @@ data class TicketItem(
     var driverName: String = "",
     var inboundWeight: Int = 0,
     var outboundWeight: Int = 0
-){
+): Parcelable{
     companion object {
         fun fromTicketEntity(ticketKey: String?, ticket: Ticket?): TicketItem {
             return TicketItem(
@@ -30,6 +34,16 @@ data class TicketItem(
                 inboundWeight = ticket.inboundWeight,
                 outboundWeight = ticket.outboundWeight
             )
+        }
+        fun toJSON(ticketItem: TicketItem?): String {
+            if(ticketItem==null) return ""
+            val gson = Gson()
+            return gson.toJson(ticketItem)
+        }
+
+        fun fromJSON(jsonString: String): TicketItem {
+            val gson = Gson()
+            return gson.fromJson(jsonString, TicketItem::class.java)
         }
     }
 }

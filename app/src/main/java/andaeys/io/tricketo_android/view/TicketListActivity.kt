@@ -69,9 +69,9 @@ class TicketListActivity : ComponentActivity() {
                 state = state,
                 onRefresh = {viewModel.fetchTicketList()},
                 onSortBy = {attr -> viewModel.sortTicketBy(attr)},
-                onAddClick = {},
-                onItemClick = {ticeke ->},
-                onEditClick = {ticket ->}
+                onAddClick = {TicketEditActivity.start(this, null)},
+                onItemClick = {ticket ->},
+                onEditClick = {ticket -> TicketEditActivity.start(this, ticket)}
             )
         }
     }
