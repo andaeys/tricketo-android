@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.firebase.database.ktx)
 
     implementation(libs.koin.android)
+    implementation (libs.accompanist.swiperefresh)
+    implementation (libs.lottie.compose)
 
     // Testing dependencies
     testImplementation(libs.junit)
