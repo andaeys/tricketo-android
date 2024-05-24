@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("kapt")
     id("com.google.gms.google-services")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -74,6 +75,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation (libs.accompanist.swiperefresh)
     implementation (libs.lottie.compose)
+    implementation(libs.gson)
 
     // Testing dependencies
     testImplementation(libs.junit)
